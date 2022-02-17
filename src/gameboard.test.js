@@ -13,9 +13,26 @@ test('layout is a two dimensional array filled with water', () => {
 });
 
 test('can place ships at given coordinates', () => {
+  const gameboard1 = new Gameboard();
+  gameboard1.placeShip(new Ship(3), 3, 3, 'horizontal');
+  expect(gameboard1.layout[3][3]).toBe('ship');
+  expect(gameboard1.layout[3][4]).toBe('ship');
+  expect(gameboard1.layout[3][5]).toBe('ship');
+  const gameboard2 = new Gameboard();
+  gameboard2.placeShip(new Ship(4), 6, 6, 'vertical');
+  expect(gameboard2.layout[6][6]).toBe('ship');
+  expect(gameboard2.layout[7][6]).toBe('ship');
+  expect(gameboard2.layout[8][6]).toBe('ship');
+  expect(gameboard2.layout[9][6]).toBe('ship');
+});
+
+test('can\'t place ships that overflow the gameboard', () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(new Ship(3), 3, 3, 'horizontal');
-  expect(gameboard.layout[3][3]).toBe('ship');
-  expect(gameboard.layout[3][4]).toBe('ship');
-  expect(gameboard.layout[3][5]).toBe('ship');
+  expect(gameboard.placeShip(new Ship(5), 0, 6, 'horizontal')).toBe('Ship overflows the gameboard.');
+});
+
+test('can\'t place ships that overlap with another ship', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(new Ship(4), 3, 3, 'horizontal');
+  expect(gameboard.placeShip(new Ship(3), 2, 4, 'vertical')).toBe('Ship overlaps with other ship.');
 });
