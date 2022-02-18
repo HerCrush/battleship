@@ -1,5 +1,4 @@
 import {Gameboard} from './gameboard';
-import {Ship} from './ship';
 
 test('layout is a two dimensional array filled with water', () => {
   const gameboard = new Gameboard();
@@ -13,28 +12,27 @@ test('layout is a two dimensional array filled with water', () => {
 });
 
 test('can place ships at given coordinates', () => {
-  const gameboard1 = new Gameboard();
-  gameboard1.placeShip(new Ship(3), 3, 3, 'horizontal');
-  expect(gameboard1.layout[3][3]).toBe('ship');
-  expect(gameboard1.layout[4][3]).toBe('ship');
-  expect(gameboard1.layout[5][3]).toBe('ship');
-  const gameboard2 = new Gameboard();
-  gameboard2.placeShip(new Ship(4), 6, 6, 'vertical');
-  expect(gameboard2.layout[6][6]).toBe('ship');
-  expect(gameboard2.layout[6][7]).toBe('ship');
-  expect(gameboard2.layout[6][8]).toBe('ship');
-  expect(gameboard2.layout[6][9]).toBe('ship');
+  const gameboard = new Gameboard();
+  gameboard.placeShip(3, 3, 'horizontal', 3);
+  expect(gameboard.layout[3][3]).toEqual({id: 0, part: 0});
+  expect(gameboard.layout[4][3]).toEqual({id: 0, part: 1});
+  expect(gameboard.layout[5][3]).toEqual({id: 0, part: 2});
+  gameboard.placeShip(6, 6, 'vertical', 4);
+  expect(gameboard.layout[6][6]).toEqual({id: 1, part: 0});
+  expect(gameboard.layout[6][7]).toEqual({id: 1, part: 1});
+  expect(gameboard.layout[6][8]).toEqual({id: 1, part: 2});
+  expect(gameboard.layout[6][9]).toEqual({id: 1, part: 3});
 });
 
 test('can\'t place ships that overflow the gameboard', () => {
   const gameboard = new Gameboard();
-  expect(gameboard.placeShip(new Ship(5), 6, 0, 'horizontal')).toBe('Ship overflows the gameboard.');
+  expect(gameboard.placeShip(6, 0, 'horizontal', 5)).toBe('Ship overflows the gameboard.');
 });
 
 test('can\'t place ships that overlap with another ship', () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(new Ship(4), 3, 3, 'horizontal');
-  expect(gameboard.placeShip(new Ship(3), 4, 2, 'vertical')).toBe('Ship overlaps with other ship.');
+  gameboard.placeShip(3, 3, 'horizontal', 4);
+  expect(gameboard.placeShip(4, 2, 'vertical', 3)).toBe('Ship overlaps with other ship.');
 });
 
 // test('attack hits a ship or records missed shot', () => {
