@@ -35,13 +35,25 @@ test('can\'t place ships that overlap with another ship', () => {
   expect(gameboard.placeShip(4, 2, 'vertical', 3)).toBe('Ship overlaps with other ship.');
 });
 
-// test('attack hits a ship or records missed shot', () => {
-//   const gameboard = new Gameboard();
-//   const ship = new Ship(3);
-//   gameboard.placeShip(ship, 4, 4, 'vertical');
-//   gameboard.receiveAttack(4, 6);
-//   expect(ship.damage[2]).toBe(true);
-//   expect(gameboard.record[4][6]).toBe('hit');
-//   gameboard.receiveAttack(7, 8);
-//   expect(gameboard.record[7][8]).toBe('miss');
-// });
+test('attack hits a ship or records missed shot', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(4, 4, 'vertical', 3);
+  gameboard.receiveAttack(4, 6);
+  expect(gameboard.record[4][6]).toBe('hit');
+  expect(gameboard.ships[0].damage[2]).toBe(true);
+  gameboard.receiveAttack(7, 8);
+  expect(gameboard.record[7][8]).toBe('miss');
+});
+
+test('reports when all ships are sunken', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(1, 2, 'vertical', 3);
+  gameboard.placeShip(4, 5, 'horizontal', 2);
+  gameboard.receiveAttack(1, 2);
+  gameboard.receiveAttack(1, 3);
+  gameboard.receiveAttack(4, 5);
+  gameboard.receiveAttack(5, 5);
+  expect(gameboard.areAllShipsSunk()).toBe(false);
+  gameboard.receiveAttack(1, 4);
+  expect(gameboard.areAllShipsSunk()).toBe(true);
+});

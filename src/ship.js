@@ -14,6 +14,7 @@ class Ship {
     if(this.damage.every(function(current) {return current})) {
       return true;
     }
+    
     else {
       return false;
     }

@@ -46,7 +46,7 @@ class Gameboard {
   constructor() {
     this.layout = create2DArray('water');
     this.record = create2DArray();
-    this.ship = [];
+    this.ships = [];
   }
 
   placeShip(x, y, orientation, size) {
@@ -56,8 +56,8 @@ class Gameboard {
       return error;
     }
 
-    this.ship.push(new Ship(size));
-    const shipID = this.ship.length-1;
+    this.ships.push(new Ship(size));
+    const shipID = this.ships.length-1;
     if(orientation === 'horizontal') {
       for(let offset = 0; offset<size; offset++) {
         this.layout[x+offset][y] = {
@@ -82,9 +82,15 @@ class Gameboard {
     if(shot === 'water') {
       this.record[x][y] = 'miss';
     }
+
     else {
-      this.ship[shot].hit()
+      this.ships[shot.id].hit(shot.part);
+      this.record[x][y] = 'hit';
     }
+  }
+
+  areAllShipsSunk() {
+    return this.ships.every(function(ship) {return ship.isSunk()});
   }
 }
 
