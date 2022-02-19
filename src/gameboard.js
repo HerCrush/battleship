@@ -1,4 +1,4 @@
-import { Ship } from "./ship";
+import {Ship} from "./ship";
 
 const create2DArray = function(filling = null) {
   let array = [];
@@ -91,6 +91,15 @@ class Gameboard {
 
   areAllShipsSunk() {
     return this.ships.every(function(ship) {return ship.isSunk()});
+  }
+
+  wasAlreadyShot(x, y) {
+    if(this.record[x][y] === 'miss' || this.record[x][y] === 'hit') {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
 

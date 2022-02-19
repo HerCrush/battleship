@@ -57,3 +57,10 @@ test('reports when all ships are sunken', () => {
   gameboard.receiveAttack(1, 4);
   expect(gameboard.areAllShipsSunk()).toBe(true);
 });
+
+test('tells if a place has been already shot', () => {
+  const gameboard = new Gameboard();
+  gameboard.receiveAttack(1, 2);
+  expect(gameboard.wasAlreadyShot(1, 2)).toBe(true);
+  expect(gameboard.wasAlreadyShot(3, 5)).toBe(false);
+});
