@@ -1,0 +1,32 @@
+:root {
+  --cell-size: 50px;
+}
+
+h1{
+  width: fit-content;
+  margin: auto;
+}
+
+#game-container {
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+
+.board-frame {
+  margin: 50px;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.board-grid {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: solid black 1px;
+}
+
+.ship {
+  background-color: rgb(255, 169, 169);
+  border-color: red;
+}
