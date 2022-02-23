@@ -64,3 +64,9 @@ test('tells if a place has been already shot', () => {
   expect(gameboard.wasAlreadyShot(1, 2)).toBe(true);
   expect(gameboard.wasAlreadyShot(3, 5)).toBe(false);
 });
+
+test('can\'t attack same place twice', () => {
+  const gameboard = new Gameboard();
+  gameboard.receiveAttack(4, 4);
+  expect(gameboard.receiveAttack(4, 4)).toBe('Repeated attack.');
+});

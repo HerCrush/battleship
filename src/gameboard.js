@@ -42,6 +42,12 @@ const checkSpace = function(layout, size, x, y, orientation) {
   }
 }
 
+const checkAttack = function(x, y, gameboard) {
+  if((gameboard.record[x][y] === 'hit') || (gameboard.record[x][y] === 'miss')) {
+    throw 'Repeated attack.';
+  }
+}
+
 class Gameboard {
   constructor() {
     this.layout = create2DArray('water');
@@ -78,6 +84,11 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
+    try {
+      checkAttack(x, y, this);
+    } catch(error) {
+      return error;
+    }
     const shot = this.layout[x][y];
     if(shot === 'water') {
       this.record[x][y] = 'miss';

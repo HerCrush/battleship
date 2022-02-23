@@ -15,10 +15,14 @@ const start = function() {
   const attackOnClick = function(event) {
     const x = event.target.dataset.x;
     const y = event.target.dataset.y;
-    computer1.gameboard.receiveAttack(x, y);
-    display.game.updateRecord(computer1.gameboard.record);
-    computer1.attack(player1);
-    display.game.updateLayout(player1.gameboard.record);
+    if(computer1.gameboard.receiveAttack(x, y) !== 'Repeated attack.') {
+      display.game.updateRecord(computer1.gameboard.record);
+      computer1.attack(player1);
+      display.game.updateLayout(player1.gameboard.record);
+    }
+    else {
+      return;
+    }
   }
   
   display.game.addRecordListener(attackOnClick);
