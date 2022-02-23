@@ -24,7 +24,7 @@ const display = (() => {
   })();
 
   const game = (() => {
-    const makeGameboard = function() {
+    const loadGameboard = function() {
       const frame = document.createElement('div');
       frame.classList.add('board-frame');
       const grid = [];
@@ -33,7 +33,8 @@ const display = (() => {
         for(let j = 0; j<10; j++){
           grid[i].push(document.createElement('div'));
           grid[i][j].classList.add('board-grid');
-          frame.appendChild(grid[i][j]);
+          grid[i][j].dataset.x = i;
+          grid[i][j].dataset.y = j;
         }
       }
 
@@ -43,41 +44,68 @@ const display = (() => {
         }
       }
 
-      const makeShip = function(x, y, orientation, size) {
-        if(orientation === 'horizontal') {
-          for(let offset = 0; offset<size; offset++) {
-            grid[x+offset][y].classList.add('ship');
-          }
-        }
-    
-        else if(orientation === 'vertical') {
-          for(let offset = 0; offset<size; offset++) {
-            grid[x][y+offset].classList.add('ship');
-          }
-        }
-      }
-
       return {
         frame,
-        grid,
-        makeShip
+        grid
       };
     }
 
-    const player1Layout = makeGameboard();
-    const player1Record = makeGameboard();
+    const layoutGameboard = loadGameboard();
+    const recordGameboard = loadGameboard();
     const load = function() {
       clean();
       const container = document.createElement('div');
       container.id = 'game-container';
-      container.append(player1Layout.frame, player1Record.frame);
+      container.append(layoutGameboard.frame, recordGameboard.frame);
       main.appendChild(container);
     }
 
+    const updateLayout = function(referenceGameboard) {
+      for(let i = 0; i<10; i++) {
+        for(let j = 0; j<10; j++) {
+          const referenceCell = referenceGameboard[i][j];
+          const layoutCell = layoutGameboard.grid[i][j];
+          if(referenceCell === 'hit') {
+            layoutCell.classList.add('hit');
+          }
+          else if(referenceCell === 'miss') {
+            layoutCell.classList.add('miss');
+          }
+          else if((referenceCell !== 'water') && (referenceCell !== null)) {
+            layoutCell.classList.add('ship');
+          }
+        }
+      }
+    }
+
+    const updateRecord = function(referenceGameboard) {
+      for(let i = 0; i<10; i++) {
+        for(let j = 0; j<10; j++) {
+          const referenceCell = referenceGameboard[i][j];
+          const recordCell = recordGameboard.grid[i][j];
+          if(referenceCell === 'hit') {
+            recordCell.classList.add('hit');
+          }
+          else if(referenceCell === 'miss') {
+            recordCell.classList.add('miss');
+          }
+        }
+      }
+    }
+
+    const addRecordListener = function(callback) {
+      recordGameboard.grid.forEach(column => {
+        column.forEach(cell => {
+          cell.addEventListener('click', callback);
+        });
+      });
+    }
+
     return {
-      player1Layout,
-      player1Record,
-      load
+      load,
+      updateLayout,
+      updateRecord,
+      addRecordListener
     };
   })();
 

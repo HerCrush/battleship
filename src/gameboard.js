@@ -1,5 +1,4 @@
 import {Ship} from "./ship";
-import {display} from "./display";
 
 const create2DArray = function(filling = null) {
   let array = [];

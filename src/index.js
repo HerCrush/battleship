@@ -10,9 +10,18 @@ const start = function() {
   const player1 = new Player();
   const computer1 = new Player();
   player1.gameboard.placeShip(1, 1, 'horizontal', 3);
-  display.game.player1Layout.makeShip(1, 1, 'horizontal', 3);
   computer1.gameboard.placeShip(0, 0, 'vertical', 4);
-  const cells = document.querySelectorAll('') //add a click event listener
+  display.game.updateLayout(player1.gameboard.layout);
+  const attackOnClick = function(event) {
+    const x = event.target.dataset.x;
+    const y = event.target.dataset.y;
+    computer1.gameboard.receiveAttack(x, y);
+    display.game.updateRecord(computer1.gameboard.record);
+    computer1.attack(player1);
+    display.game.updateLayout(player1.gameboard.record);
+  }
+  
+  display.game.addRecordListener(attackOnClick);
 }
 
 display.playerScreen.onePlayerButton.addEventListener('click', start);
