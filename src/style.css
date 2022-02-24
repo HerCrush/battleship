@@ -27,7 +27,7 @@ h1{
 }
 
 .ship {
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(200, 200, 200);
   border-color: black;
 }
 
@@ -39,4 +39,33 @@ h1{
 .miss {
   background-color: rgb(145, 145, 255);
   border-color: blue;
+}
+
+.self-hit {
+  background-color: rgb(180, 128, 128);
+  border-color: rgb(230, 128, 128);
+}
+
+.self-miss {
+  background-color: rgb(128, 128, 180);
+  border-color: rgb(128, 128, 230);
+}
+
+#blocking-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-over-sign {
+  width: 300px;
+  height: 300px;
+  color: white;
+  background-color: black;
+  text-align: center;
 }

@@ -66,10 +66,10 @@ const display = (() => {
           const referenceCell = referenceGameboard[i][j];
           const layoutCell = layoutGameboard.grid[i][j];
           if(referenceCell === 'hit') {
-            layoutCell.classList.add('hit');
+            layoutCell.classList.add('self-hit');
           }
           else if(referenceCell === 'miss') {
-            layoutCell.classList.add('miss');
+            layoutCell.classList.add('self-miss');
           }
           else if((referenceCell !== 'water') && (referenceCell !== null)) {
             layoutCell.classList.add('ship');
@@ -93,19 +93,34 @@ const display = (() => {
       }
     }
 
-    const addRecordListener = function(callback) {
+    const addRecordAction = function(callback) {
       recordGameboard.grid.forEach(column => {
         column.forEach(cell => {
-          cell.addEventListener('click', callback);
+          cell.addEventListener('click', function(event) {
+            const x = event.target.dataset.x;
+            const y = event.target.dataset.y;
+            callback(x, y);
+          });
         });
       });
+    }
+
+    const loadGameOverScreen = function(winner) {
+      const blockingScreen = document.createElement('div');
+      blockingScreen.id = 'blocking-screen';
+      const gameOverSign = document.createElement('div');
+      gameOverSign.id = 'game-over-sign';
+      gameOverSign.textContent = `GAME OVER: ${winner} wins!`;
+      blockingScreen.appendChild(gameOverSign);
+      main.appendChild(blockingScreen);
     }
 
     return {
       load,
       updateLayout,
       updateRecord,
-      addRecordListener
+      addRecordAction,
+      loadGameOverScreen
     };
   })();
 

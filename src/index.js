@@ -1,31 +1,27 @@
 import './reset.css';
 import './style.css';
-import {Player} from './player';
+import {game} from './game';
 import {display} from './display';
 
 display.home.playButton.addEventListener('click', display.playerScreen.load);
 
-const start = function() {
+display.playerScreen.onePlayerButton.addEventListener('click', function() {
   display.game.load();
-  const player1 = new Player();
-  const computer1 = new Player();
-  player1.gameboard.placeShip(1, 1, 'horizontal', 3);
-  computer1.gameboard.placeShip(0, 0, 'vertical', 4);
-  display.game.updateLayout(player1.gameboard.layout);
-  const attackOnClick = function(event) {
-    const x = event.target.dataset.x;
-    const y = event.target.dataset.y;
-    if(computer1.gameboard.receiveAttack(x, y) !== 'Repeated attack.') {
-      display.game.updateRecord(computer1.gameboard.record);
-      computer1.attack(player1);
-      display.game.updateLayout(player1.gameboard.record);
+  game.start();
+  display.game.updateLayout(game.player1.gameboard.layout);
+  display.game.addRecordAction(function(x, y) {
+    if(game.doPlayerTurn(x, y)) {
+      display.game.updateRecord(game.computer1.gameboard.record);
+      if(game.checkStatus() === 'player wins') {
+        display.game.loadGameOverScreen('player');
+      }
+      else {
+        game.doPcTurn();
+        display.game.updateLayout(game.player1.gameboard.record);
+        if(game.checkStatus() === 'pc wins') {
+          display.game.loadGameOverScreen('pc');
+        }
+      }
     }
-    else {
-      return;
-    }
-  }
-  
-  display.game.addRecordListener(attackOnClick);
-}
-
-display.playerScreen.onePlayerButton.addEventListener('click', start);
+  });
+});

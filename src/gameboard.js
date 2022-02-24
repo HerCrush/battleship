@@ -103,15 +103,6 @@ class Gameboard {
   areAllShipsSunk() {
     return this.ships.every(function(ship) {return ship.isSunk()});
   }
-
-  wasAlreadyShot(x, y) {
-    if(this.record[x][y] === 'miss' || this.record[x][y] === 'hit') {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
 }
 
 export {
