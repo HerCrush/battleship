@@ -1,27 +1,33 @@
 import './reset.css';
 import './style.css';
 import {game} from './game';
-import {display} from './display';
+import {homeScreen} from './dom/home-screen';
+import {playerScreen} from './dom/player-screen';
+import {gameScreen} from './dom/game-screen';
 
-display.home.playButton.addEventListener('click', display.playerScreen.load);
+homeScreen.playButton.addEventListener('click', playerScreen.load);
 
-display.playerScreen.onePlayerButton.addEventListener('click', function() {
-  display.game.load();
-  game.start();
-  display.game.updateLayout(game.player1.gameboard.layout);
-  display.game.addRecordAction(function(x, y) {
-    if(game.doPlayerTurn(x, y)) {
-      display.game.updateRecord(game.computer1.gameboard.record);
-      if(game.checkStatus() === 'player wins') {
-        display.game.loadGameOverScreen('player');
-      }
-      else {
-        game.doPcTurn();
-        display.game.updateLayout(game.player1.gameboard.record);
-        if(game.checkStatus() === 'pc wins') {
-          display.game.loadGameOverScreen('pc');
+playerScreen.onePlayerButton.addEventListener('click', function() {
+  gameScreen.load();
+  gameScreen.addReadyHandler(function() {
+    game.start();
+    gameScreen.updateLayout(game.player1.gameboard.layout);
+    gameScreen.addRecordHandler(function(x, y) {
+      if(game.doPlayerTurn(x, y)) {
+        gameScreen.updateRecord(game.computer1.gameboard.record);
+        if(game.checkStatus() === 'player wins') {
+          gameScreen.loadGameOverScreen('player');
+        }
+        else {
+          game.doPcTurn();
+          gameScreen.updateLayout(game.player1.gameboard.record);
+          if(game.checkStatus() === 'pc wins') {
+            gameScreen.loadGameOverScreen('pc');
+          }
         }
       }
-    }
+    });
   });
 });
+
+//THINK IT BACKWARDS

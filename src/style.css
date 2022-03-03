@@ -5,9 +5,10 @@
 h1{
   width: fit-content;
   margin: auto;
+  font-size: 48pt;
 }
 
-#game-container {
+#gameboard-container {
   display: flex;
   width: fit-content;
   margin: auto;
