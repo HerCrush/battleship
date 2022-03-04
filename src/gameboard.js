@@ -4,7 +4,7 @@ const create2DArray = function(filling = null) {
   let array = [];
   for(let i = 0; i<10; i++) {
     array.push([]);
-    for(let j = 0; j<10; j++){
+    for(let j = 0; j<10; j++) {
       array[i].push(filling);
     }
   }
@@ -68,6 +68,7 @@ class Gameboard {
       for(let offset = 0; offset<size; offset++) {
         this.layout[x+offset][y] = {
           id: shipID,
+          orientation: orientation,
           part: offset
         };
       }
@@ -77,6 +78,7 @@ class Gameboard {
       for(let offset = 0; offset<size; offset++) {
         this.layout[x][y+offset] = {
           id: shipID,
+          orientation: orientation,
           part: offset
         };
       }

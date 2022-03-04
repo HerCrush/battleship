@@ -7,7 +7,7 @@ const gameScreen = (() => {
     const grid = [];
     for(let i = 0; i<10; i++) {
       grid.push([]);
-      for(let j = 0; j<10; j++){
+      for(let j = 0; j<10; j++) {
         grid[i].push(document.createElement('div'));
         grid[i][j].classList.add('board-grid');
         grid[i][j].dataset.x = i;
@@ -16,7 +16,7 @@ const gameScreen = (() => {
     }
 
     for(let i = 0; i<10; i++) {
-      for(let j = 0; j<10; j++){
+      for(let j = 0; j<10; j++) {
         frame.appendChild(grid[j][i]);
       }
     }
@@ -29,17 +29,13 @@ const gameScreen = (() => {
 
   const layoutGameboard = loadGameboard();
   const recordGameboard = loadGameboard();
-  const readyButton = document.createElement('button');
   const load = function() {
     clean();
-    // const shipsContainer = document.createElement('div');
-    // shipsContainer.id = 'ships-container';
     const container = document.createElement('div');
     container.id = 'gameboard-container';
     container.append(layoutGameboard.frame, recordGameboard.frame);
-    readyButton.textContent = 'READY';
     const main = document.querySelector('main');
-    main.append(container, readyButton);
+    main.appendChild(container);
   }
 
   const addReadyHandler = function(callback) {

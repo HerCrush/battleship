@@ -1,4 +1,4 @@
-import {Gameboard} from './gameboard';
+import {Gameboard} from '../gameboard';
 
 test('layout is a two dimensional array filled with water', () => {
   const gameboard = new Gameboard();
@@ -14,14 +14,14 @@ test('layout is a two dimensional array filled with water', () => {
 test('can place ships at given coordinates', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(3, 3, 'horizontal', 3);
-  expect(gameboard.layout[3][3]).toEqual({id: 0, part: 0});
-  expect(gameboard.layout[4][3]).toEqual({id: 0, part: 1});
-  expect(gameboard.layout[5][3]).toEqual({id: 0, part: 2});
+  expect(gameboard.layout[3][3]).toEqual({id: 0, orientation: 'horizontal', part: 0});
+  expect(gameboard.layout[4][3]).toEqual({id: 0, orientation: 'horizontal', part: 1});
+  expect(gameboard.layout[5][3]).toEqual({id: 0, orientation: 'horizontal', part: 2});
   gameboard.placeShip(6, 6, 'vertical', 4);
-  expect(gameboard.layout[6][6]).toEqual({id: 1, part: 0});
-  expect(gameboard.layout[6][7]).toEqual({id: 1, part: 1});
-  expect(gameboard.layout[6][8]).toEqual({id: 1, part: 2});
-  expect(gameboard.layout[6][9]).toEqual({id: 1, part: 3});
+  expect(gameboard.layout[6][6]).toEqual({id: 1, orientation: 'vertical', part: 0});
+  expect(gameboard.layout[6][7]).toEqual({id: 1, orientation: 'vertical', part: 1});
+  expect(gameboard.layout[6][8]).toEqual({id: 1, orientation: 'vertical', part: 2});
+  expect(gameboard.layout[6][9]).toEqual({id: 1, orientation: 'vertical', part: 3});
 });
 
 test('can\'t place ships that overflow the gameboard', () => {

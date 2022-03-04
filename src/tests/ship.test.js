@@ -1,4 +1,4 @@
-import {Ship} from './ship';
+import {Ship} from '../ship';
 
 test('create a ship object with size and damage properties', () => {
   expect(new Ship(3)).toEqual({size: 3, damage: [false, false, false]});
