@@ -1,4 +1,4 @@
-import {Ship} from "./ship";
+import { Ship } from "./ship";
 
 const create2DArray = function(filling = null) {
   let array = [];
@@ -10,6 +10,12 @@ const create2DArray = function(filling = null) {
   }
   
   return array;
+}
+
+const copyArray = function(original) {
+  let copy = JSON.stringify(original);
+  copy = JSON.parse(copy);
+  return copy;
 }
 
 const checkSpace = function(layout, size, x, y, orientation) {
@@ -73,11 +79,63 @@ class Gameboard {
         };
       }
     }
-
     else if(orientation === 'vertical') {
       for(let offset = 0; offset<size; offset++) {
         this.layout[x][y+offset] = {
           id: shipID,
+          orientation: orientation,
+          part: offset
+        };
+      }
+    }
+  }
+
+  moveShip(xo, yo, xf, yf) {
+    const id = this.layout[xo][yo].id;
+    const orientation = this.layout[xo][yo].orientation;
+    const size = this.ships[id].size;
+    const layoutWithoutShip = copyArray(this.layout);
+    if(orientation === 'horizontal') {
+      for(let offset = 0; offset<size; offset++) {
+        layoutWithoutShip[xo+offset][yo] = 'water';
+      }
+    }
+    else if(orientation === 'vertical') {
+      for(let offset = 0; offset<size; offset++) {
+        layoutWithoutShip[xo][yo+offset] = 'water';
+      }
+    }
+
+    try {
+      checkSpace(layoutWithoutShip, size, xf, yf, orientation);
+    } catch(error) {
+      return error;
+    }
+
+    if(orientation === 'horizontal') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[xo+offset][yo] = 'water';
+      }
+    }
+    else if(orientation === 'vertical') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[xo][yo+offset] = 'water';
+      }
+    }
+
+    if(orientation === 'horizontal') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[xf+offset][yf] = {
+          id: id,
+          orientation: orientation,
+          part: offset
+        };
+      }
+    }
+    else if(orientation === 'vertical') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[xf][yf+offset] = {
+          id: id,
           orientation: orientation,
           part: offset
         };

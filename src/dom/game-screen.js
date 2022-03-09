@@ -1,4 +1,4 @@
-import {clean} from './clean';
+import { clean } from './clean';
 
 const gameScreen = (() => {
   const loadGameboard = function() {

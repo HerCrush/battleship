@@ -1,10 +1,10 @@
 import './styles/reset.css';
 import './styles/style.css';
-import {game} from './game';
-import {homeScreen} from './dom/home-screen';
-import {playerScreen} from './dom/player-screen';
-import {shipPlacementScreen} from './dom/ship-placement-screen';
-import {gameScreen} from './dom/game-screen';
+import { game } from './game';
+import { homeScreen } from './dom/home-screen';
+import { playerScreen } from './dom/player-screen';
+import { shipPlacementScreen } from './dom/ship-placement-screen';
+import { gameScreen } from './dom/game-screen';
 
 homeScreen.playButton.addEventListener('click', playerScreen.load);
 

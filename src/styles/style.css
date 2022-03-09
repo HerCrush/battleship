@@ -27,6 +27,27 @@ h1{
   border: solid grey 1px;
 }
 
+#ships-container {
+  margin: auto;
+  width: 300px;
+  height: 500px;
+  display: flex;
+  border: solid black 1px;
+}
+
+.draggable-ship {
+  position: relative;
+  top: -1px;
+  left: -1px;
+}
+
+.draggable-ship-part {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: solid rgb(0, 191, 255) 1px;
+  background-color: rgb(166, 233, 255);
+}
+
 .ship {
   background-color: rgb(200, 200, 200);
   border-color: black;

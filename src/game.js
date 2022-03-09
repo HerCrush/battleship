@@ -1,11 +1,11 @@
-import {Player} from "./player";
+import { Player } from "./player";
 
 const game = (() => {
   const player1 = new Player();
   const computer1 = new Player();
   const placeShips = function(ships) {
     ships.forEach(function(ship) {
-      player1.gameboard.placeShip(ship.x, ship.y, ship.orientation, ship.size);
+      player1.gameboard.placeShip(parseInt(ship.x), parseInt(ship.y), ship.orientation, parseInt(ship.size));
     });
   };
 

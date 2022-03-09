@@ -1,4 +1,4 @@
-import {clean} from './clean';
+import { clean } from './clean';
 
 const playerScreen = (() => {
   const onePlayerButton = document.createElement('button');

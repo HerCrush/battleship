@@ -1,5 +1,5 @@
-import {Player} from '../player';
-import {Gameboard} from '../gameboard';
+import { Player } from '../player';
+import { Gameboard } from '../gameboard';
 
 test('each player has a gameboard', () => {
   const player = new Player();
