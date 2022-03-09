@@ -143,6 +143,67 @@ class Gameboard {
     }
   }
 
+  rotateShip(x, y) {
+    const id = this.layout[x][y].id;
+    const orientation = this.layout[x][y].orientation;
+    const size = this.ships[id].size;
+    let newOrientation;
+    if(orientation === 'horizontal') {
+      newOrientation = 'vertical';
+    }
+    else if(orientation === 'vertical') {
+      newOrientation = 'horizontal';
+    }
+
+    const layoutWithoutShip = copyArray(this.layout);
+    if(orientation === 'horizontal') {
+      for(let offset = 0; offset<size; offset++) {
+        layoutWithoutShip[x+offset][y] = 'water';
+      }
+    }
+    else if(orientation === 'vertical') {
+      for(let offset = 0; offset<size; offset++) {
+        layoutWithoutShip[x][y+offset] = 'water';
+      }
+    }
+
+    try {
+      checkSpace(layoutWithoutShip, size, x, y, newOrientation);
+    } catch(error) {
+      return error;
+    }
+
+    if(orientation === 'horizontal') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[x+offset][y] = 'water';
+      }
+    }
+    else if(orientation === 'vertical') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[x][y+offset] = 'water';
+      }
+    }
+
+    if(newOrientation === 'horizontal') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[x+offset][y] = {
+          id: id,
+          orientation: 'horizontal',
+          part: offset
+        };
+      }
+    }
+    else if(newOrientation === 'vertical') {
+      for(let offset = 0; offset<size; offset++) {
+        this.layout[x][y+offset] = {
+          id: id,
+          orientation: 'vertical',
+          part: offset
+        };
+      }
+    }
+  }
+
   receiveAttack(x, y) {
     try {
       checkAttack(x, y, this);

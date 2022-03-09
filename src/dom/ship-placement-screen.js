@@ -1,6 +1,6 @@
 import { clean } from "./clean";
 import { Gameboard } from "../gameboard";
-import { dragStartHandler, dragOverHandler, dropHandler } from "./drag-and-drop";
+import { dragStartHandler, dragOverHandler, dropHandler, clickHandler } from "./drag-and-drop";
 
 const shipPlacementScreen = (() => {
   const layoutRecord = new Gameboard();
@@ -23,7 +23,9 @@ const shipPlacementScreen = (() => {
         frame.appendChild(grid[j][i]);
         grid[j][i].addEventListener('dragover', dragOverHandler);
         grid[j][i].addEventListener('drop', function(event) {
-          dropHandler(event, layoutRecord);
+          const updatedLayout = dropHandler(event, layoutRecord);
+          layoutRecord.layout = updatedLayout.layout;
+          layoutRecord.ships = updatedLayout.ships;
         });
       }
     }
@@ -48,6 +50,11 @@ const shipPlacementScreen = (() => {
     }
 
     ship.addEventListener('dragstart', dragStartHandler);
+    ship.addEventListener('click', function(event) {
+      const updatedLayout = clickHandler(event, layoutRecord);
+      layoutRecord.layout = updatedLayout.layout;
+      layoutRecord.ships = updatedLayout.ships;
+    });
     return ship;
   }
 

@@ -39,6 +39,16 @@ h1{
   position: relative;
   top: -1px;
   left: -1px;
+  display: flex;
+}
+
+.draggable-ship[data-orientation="vertical"] {
+  flex-direction: column;
+}
+
+.draggable-ship[data-orientation="horizontal"] {
+  flex-direction: row;
+  width: fit-content;
 }
 
 .draggable-ship-part {

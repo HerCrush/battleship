@@ -34,6 +34,17 @@ test('can move a ship', () => {
   expect(gameboard.layout[3][4]).toEqual({id: 0, orientation: 'vertical', part: 1});
 });
 
+test('can rotate a ship', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(1, 1, 'vertical', 3);
+  gameboard.rotateShip(1, 1);
+  expect(gameboard.layout[1][1]).toEqual({id: 0, orientation: 'horizontal', part: 0});
+  expect(gameboard.layout[2][1]).toEqual({id: 0, orientation: 'horizontal', part: 1});
+  expect(gameboard.layout[3][1]).toEqual({id: 0, orientation: 'horizontal', part: 2});
+  expect(gameboard.layout[1][2]).toBe('water');
+  expect(gameboard.layout[1][3]).toBe('water');
+});
+
 test('can\'t place ships that overflow the gameboard', () => {
   const gameboard = new Gameboard();
   expect(gameboard.placeShip(6, 0, 'horizontal', 5)).toBe('Ship overflows the gameboard.');

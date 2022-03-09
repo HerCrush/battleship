@@ -1,5 +1,3 @@
-import { Gameboard } from "../gameboard";
-
 const dragStartHandler = function(event) {
   const shipData = event.dataTransfer;
   shipData.dataEffect = 'move';
@@ -22,9 +20,9 @@ const dropHandler = function(event, gameboard) {
   let cell = event.target;
   if(cell.className.includes('draggable-ship-part')) {
     const ship = cell.parentElement;
-    ship.hidden = true;
+    ship.style.display = 'none';
     cell = document.elementFromPoint(event.clientX, event.clientY);
-    ship.hidden = false;
+    ship.style.display = 'flex';
   }
 
   const shipData = event.dataTransfer;
@@ -46,10 +44,36 @@ const dropHandler = function(event, gameboard) {
       cell.appendChild(ship);
     }
   }
+
+  return gameboard;
 };
+
+const clickHandler = function(event, gameboard) {
+  const ship = event.target.parentElement;
+  if(ship.parentElement.id === 'ships-container') {
+    return gameboard;
+  }
+
+  const orientation = ship.dataset.orientation;
+  const cell = ship.parentElement;
+  const x = parseInt(cell.dataset.x);
+  const y = parseInt(cell.dataset.y);
+  const rotation = gameboard.rotateShip(x, y);
+  if((rotation !== 'Ship overflows the gameboard.') && (rotation !== 'Ship overlaps with other ship.')) {
+    if(orientation === 'vertical') {
+      ship.dataset.orientation = 'horizontal';
+    }
+    else if(orientation === 'horizontal') {
+      ship.dataset.orientation = 'vertical';
+    }
+  }
+
+  return gameboard;
+}
 
 export {
   dragStartHandler,
   dragOverHandler,
-  dropHandler
+  dropHandler,
+  clickHandler
 }
