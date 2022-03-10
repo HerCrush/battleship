@@ -56,6 +56,13 @@ test('can\'t place ships that overlap with another ship', () => {
   expect(gameboard.placeShip(4, 2, 'vertical', 3)).toBe('Ship overlaps with other ship.');
 });
 
+test('can\'t place a ship next to another ship', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(4, 4, 'vertical', 3);
+  expect(gameboard.placeShip(3, 4, 'vertical', 4)).toBe('Ship is next to other ship.');
+  expect(gameboard.placeShip(2, 5, 'horizontal', 2)).toBe('Ship is next to other ship.');
+});
+
 test('attack hits a ship or records missed shot', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(4, 4, 'vertical', 3);

@@ -23,7 +23,6 @@ const checkSpace = function(layout, size, x, y, orientation) {
     if(size > 10-x) {
       throw 'Ship overflows the gameboard.';
     }
-
     else {
       for(let offset = 0; offset<size; offset++) {
         if(layout[x+offset][y] !== 'water') {
@@ -37,7 +36,6 @@ const checkSpace = function(layout, size, x, y, orientation) {
     if(size > 10-y) {
       throw 'Ship overflows the gameboard.';
     }
-
     else {
       for(let offset = 0; offset<size; offset++) {
         if(layout[x][y+offset] !== 'water') {

@@ -67,11 +67,17 @@ const shipPlacementScreen = (() => {
   container.append(shipsContainer, layoutGameboard.frame);
   const load = function() {
     clean();
-    const carrier = makeShip(4);
+    const carrier = makeShip(5);
     carrier.id = 'carrier';
-    const battleship = makeShip(3);
+    const battleship = makeShip(4);
     battleship.id = 'battleship';
-    shipsContainer.append(carrier, battleship);
+    const cruiser = makeShip(3);
+    cruiser.id = 'cruiser';
+    const submarine = makeShip(3);
+    submarine.id = 'submarine';
+    const destroyer = makeShip(2);
+    destroyer.id = 'destroyer';
+    shipsContainer.append(carrier, battleship, cruiser, submarine, destroyer);
     const main = document.querySelector('main');
     main.append(container, readyButton);
   }

@@ -10,11 +10,11 @@ const game = (() => {
   };
 
   const start = function() {
-    computer1.gameboard.placeShip(0, 0, 'vertical', 4);
+    computer1.placeAllShipsAtRandom();
   };
 
   const doPcTurn = function() {
-      computer1.attack(player1);
+      computer1.makeRandomAttack(player1);
   };
 
   const doPlayerTurn = function(x, y) {

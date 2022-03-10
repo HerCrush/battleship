@@ -9,6 +9,6 @@ test('each player has a gameboard', () => {
 test('a player can attack other player', () => {
   const playerOne = new Player();
   const playerTwo = new Player();
-  playerOne.attack(playerTwo);
+  playerOne.makeRandomAttack(playerTwo);
   expect(playerTwo.gameboard.record.flat()).toContain('miss');
 });
