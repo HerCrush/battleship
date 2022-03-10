@@ -32,7 +32,7 @@ class Player {
     let { x, y } = chooseRandomCoordinates();
     let orientation = chooseRandomOrientation();
     let place = this.gameboard.placeShip(x, y, orientation, size);
-    while((place === 'Ship overflows the gameboard.') || (place === 'Ship overlaps with other ship.')) {
+    while((place === 'Ship overflows the gameboard.') || (place === 'Ship overlaps with other ship.') || (place === 'Ship is next to other ship.')) {
       ({ x, y } = chooseRandomCoordinates());
       orientation = chooseRandomOrientation();
       place = this.gameboard.placeShip(x, y, orientation, size);

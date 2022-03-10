@@ -34,13 +34,13 @@ const dropHandler = function(event, gameboard) {
     const xo = parseInt(shipData.getData('xo'));
     const yo = parseInt(shipData.getData('yo'));
     const move = gameboard.moveShip(xo, yo, xf, yf);
-    if((move !== 'Ship overflows the gameboard.') && (move !== 'Ship overlaps with other ship.')) {
+    if((move !== 'Ship overflows the gameboard.') && (move !== 'Ship overlaps with other ship.') && (move !== 'Ship is next to other ship.')) {
       cell.appendChild(ship);
     }
   }
   else {
-    const place = gameboard.placeShip(xf, yf, ship.dataset.orientation, ship.dataset.size);
-    if((place !== 'Ship overflows the gameboard.') && (place !== 'Ship overlaps with other ship.')) {
+    const place = gameboard.placeShip(xf, yf, ship.dataset.orientation, parseInt(ship.dataset.size));
+    if((place !== 'Ship overflows the gameboard.') && (place !== 'Ship overlaps with other ship.') && (place !== 'Ship is next to other ship.')) {
       cell.appendChild(ship);
     }
   }
@@ -59,7 +59,7 @@ const clickHandler = function(event, gameboard) {
   const x = parseInt(cell.dataset.x);
   const y = parseInt(cell.dataset.y);
   const rotation = gameboard.rotateShip(x, y);
-  if((rotation !== 'Ship overflows the gameboard.') && (rotation !== 'Ship overlaps with other ship.')) {
+  if((rotation !== 'Ship overflows the gameboard.') && (rotation !== 'Ship overlaps with other ship.') && (rotation !== 'Ship is next to other ship.')) {
     if(orientation === 'vertical') {
       ship.dataset.orientation = 'horizontal';
     }

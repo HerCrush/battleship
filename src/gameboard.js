@@ -29,6 +29,36 @@ const checkSpace = function(layout, size, x, y, orientation) {
           throw 'Ship overlaps with other ship.';
         }
       }
+
+      let leftLimit = x-1;
+      let topLimit = y-1;
+      let rightLimit = x+size;
+      let bottomLimit = y+1;
+      if(leftLimit < 0) {
+        leftLimit = x;
+      }
+
+      if(topLimit < 0) {
+        topLimit = y;
+      }
+      
+      if(rightLimit > 9) {
+        rightLimit = 9;
+      }
+
+      if(bottomLimit > 9) {
+        bottomLimit = 9;
+      }
+
+      for(let xOffset = leftLimit; xOffset<=rightLimit; xOffset++) {
+        for(let yOffset = topLimit; yOffset<=bottomLimit; yOffset++) {
+          if((xOffset < x) || (xOffset > x+size-1) || (yOffset !== y)) {
+            if(layout[xOffset][yOffset] !== 'water') {
+              throw 'Ship is next to other ship.';
+            }
+          }
+        }
+      }
     }
   }
 
@@ -40,6 +70,36 @@ const checkSpace = function(layout, size, x, y, orientation) {
       for(let offset = 0; offset<size; offset++) {
         if(layout[x][y+offset] !== 'water') {
           throw 'Ship overlaps with other ship.';
+        }
+      }
+
+      let leftLimit = x-1;
+      let topLimit = y-1;
+      let rightLimit = x+1;
+      let bottomLimit = y+size;
+      if(leftLimit < 0) {
+        leftLimit = x;
+      }
+
+      if(topLimit < 0) {
+        topLimit = y;
+      }
+      
+      if(rightLimit > 9) {
+        rightLimit = 9;
+      }
+
+      if(bottomLimit > 9) {
+        bottomLimit = 9;
+      }
+
+      for(let xOffset = leftLimit; xOffset<=rightLimit; xOffset++) {
+        for(let yOffset = topLimit; yOffset<=bottomLimit; yOffset++) {
+          if((xOffset !== x) || (yOffset < y) || (yOffset > y+size-1)) {
+            if(layout[xOffset][yOffset] !== 'water') {
+              throw 'Ship is next to other ship.';
+            }
+          }
         }
       }
     }
