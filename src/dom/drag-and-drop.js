@@ -2,6 +2,8 @@ const dragStartHandler = function(event) {
   const shipData = event.dataTransfer;
   shipData.dataEffect = 'move';
   shipData.setData('text/plain', event.target.id);
+  shipData.setData('offsetY', event.offsetY);
+  shipData.setData('offsetX', event.offsetX);
   const parent = event.target.parentElement;
   if(parent.className.includes('board-grid')) {
     shipData.setData('isPlaced', 'true');
@@ -28,8 +30,29 @@ const dropHandler = function(event, gameboard) {
   const shipData = event.dataTransfer;
   const id = shipData.getData('text/plain');
   const ship = document.querySelector(`#${id}`);
-  const xf = parseInt(cell.dataset.x);
-  const yf = parseInt(cell.dataset.y);
+  let xf = parseInt(cell.dataset.x);
+  let offsetX = parseInt(shipData.getData('offsetX'));
+  while(offsetX > cell.offsetWidth) {
+    xf -= 1;
+    if(xf < 0) {
+      return gameboard;
+    }
+    
+    offsetX = offsetX-cell.offsetWidth;
+  }
+
+  let yf = parseInt(cell.dataset.y);
+  let offsetY = parseInt(shipData.getData('offsetY'));
+  while(offsetY > cell.offsetHeight) {
+    yf -= 1;
+    if(yf < 0) {
+      return gameboard;
+    }
+    
+    offsetY = offsetY-cell.offsetHeight;
+  }
+
+  cell = document.querySelector(`.board-grid[data-x="${xf}"][data-y="${yf}"]`);
   if(shipData.getData('isPlaced')) {
     const xo = parseInt(shipData.getData('xo'));
     const yo = parseInt(shipData.getData('yo'));
