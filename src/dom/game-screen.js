@@ -4,6 +4,24 @@ const gameScreen = (() => {
   const loadGameboard = function() {
     const frame = document.createElement('div');
     frame.classList.add('board-frame');
+    const board = document.createElement('div');
+    board.classList.add('board');
+    const xAxis = document.createElement('div');
+    xAxis.classList.add('x-axis');
+    for(let i = 0; i<10; i++) {
+      const letter = document.createElement('p');
+      letter.textContent = String.fromCharCode(65+i);
+      xAxis.appendChild(letter);
+    }
+
+    const yAxis = document.createElement('div');
+    yAxis.classList.add('y-axis');
+    for(let i = 1; i<=10; i++) {
+      const number = document.createElement('p');
+      number.textContent = i;
+      yAxis.appendChild(number);
+    }
+
     const grid = [];
     for(let i = 0; i<10; i++) {
       grid.push([]);
@@ -17,10 +35,11 @@ const gameScreen = (() => {
 
     for(let i = 0; i<10; i++) {
       for(let j = 0; j<10; j++) {
-        frame.appendChild(grid[j][i]);
+        board.appendChild(grid[j][i]);
       }
     }
 
+    frame.append(xAxis, yAxis, board);
     return {
       frame,
       grid
