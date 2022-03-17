@@ -27,6 +27,8 @@ class Player {
     let y = this.lastAttack.y;
     if((this.lastAttack.foundShip) && (this.lastAttack.shipOrientation === 'unknown')) {
       do {
+        x = this.lastAttack.x;
+        y = this.lastAttack.y;
         switch(Math.round(Math.random()*3)) {
           case 0:  //up
             if(this.lastAttack.y > 0) {
@@ -46,6 +48,18 @@ class Player {
           case 3:  //left
             if(this.lastAttack.x > 0) {
               x = this.lastAttack.x-1;
+              break;
+            }
+            else if(this.lastAttack.y > 0) {  //test the previous cases
+              y = this.lastAttack.y-1;
+              break;
+            }
+            else if(this.lastAttack.y < 9) {
+              y = this.lastAttack.y+1;
+              break;
+            }
+            else if(this.lastAttack.x < 9) {
+              x = this.lastAttack.x+1;
               break;
             }
         }
