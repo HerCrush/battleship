@@ -39,10 +39,21 @@ const gameScreen = (() => {
       }
     }
 
+    const clean = function() {
+      for(let i = 0; i<10; i++) {
+        for(let j = 0; j<10; j++) {
+          while(grid[i][j].firstChild) {
+            grid[i][j].className = 'board-grid';
+          }
+        }
+      }
+    }
+
     frame.append(xAxis, yAxis, board);
     return {
       frame,
-      grid
+      grid,
+      clean
     };
   }
 
@@ -50,18 +61,13 @@ const gameScreen = (() => {
   const recordGameboard = loadGameboard();
   const load = function() {
     clean();
+    layoutGameboard.clean();
+    recordGameboard.clean();
     const container = document.createElement('div');
     container.id = 'gameboard-container';
     container.append(layoutGameboard.frame, recordGameboard.frame);
     const main = document.querySelector('main');
     main.appendChild(container);
-  }
-
-  const addReadyHandler = function(callback) {
-    readyButton.addEventListener('click', function() {
-      callback();
-      readyButton.remove();
-    });
   }
 
   const updateLayout = function(referenceGameboard) {
@@ -109,24 +115,43 @@ const gameScreen = (() => {
     });
   }
 
+  const playAgainButton = document.createElement('button');
+  playAgainButton.id = 'play-again-button';
+  playAgainButton.textContent = 'PLAY AGAIN';
+  const homeButton = document.createElement('button');
+  homeButton.id = 'home-button';
+  homeButton.textContent = 'HOME';
   const loadGameOverScreen = function(winner) {
     const blockingScreen = document.createElement('div');
     blockingScreen.id = 'blocking-screen';
-    const gameOverSign = document.createElement('div');
-    gameOverSign.id = 'game-over-sign';
-    gameOverSign.textContent = `GAME OVER: ${winner} wins!`;
-    blockingScreen.appendChild(gameOverSign);
+    const container = document.createElement('div');
+    container.id = 'game-over-container';
+    const gameOverText = document.createElement('h2');
+    gameOverText.textContent = 'GAME OVER';
+    const winnerText = document.createElement('h3');
+    winnerText.textContent = `${winner} wins!`;
+    container.append(gameOverText, winnerText, playAgainButton, homeButton);
+    blockingScreen.appendChild(container);
     const main = document.querySelector('main');
     main.appendChild(blockingScreen);
   }
 
+  const addPlayAgainHandler = function(callback) {
+    playAgainButton.addEventListener('click', callback);
+  }
+
+  const addHomeHandler = function(callback) {
+    homeButton.addEventListener('click', callback);
+  }
+
   return {
     load,
-    addReadyHandler,
     updateLayout,
     updateRecord,
     addRecordHandler,
-    loadGameOverScreen
+    loadGameOverScreen,
+    addPlayAgainHandler,
+    addHomeHandler
   };
 })();
 

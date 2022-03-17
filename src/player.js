@@ -194,6 +194,15 @@ class Player {
     this.placeShipAtRandom(3);
     this.placeShipAtRandom(2);
   }
+
+  reset() {
+    this.gameboard.clean();
+    this.lastAttack.x = null;
+    this.lastAttack.y = null;
+    this.lastAttack.shot = null;
+    this.lastAttack.shipOrientation = 'unknown';
+    this.lastAttack.foundShip = false;
+  }
 }
 
 export {

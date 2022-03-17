@@ -9,6 +9,8 @@
   --lighter-green: hsl(124, 21%, 65%);
   --green: rgb(77,120,78);
   --dark-green: hsl(121, 22%, 25%);
+  --darker-green: hsl(121, 22%, 5%);
+  --light-cream: hsl(52, 55%, 95%);
 }
 
 body {
@@ -114,13 +116,13 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   border: outset var(--green) 5px;
+  background-color: hsl(124, 21%, 60%);
 }
 
 .board-grid {
   width: var(--cell-size);
   height: var(--cell-size);
   border: solid var(--green) var(--cell-border-width);
-  background-color: hsl(124, 21%, 60%);
 }
 
 #ships-container {
@@ -198,10 +200,52 @@ button:hover {
   align-items: center;
 }
 
-#game-over-sign {
-  width: 300px;
-  height: 300px;
-  color: white;
-  background-color: black;
-  text-align: center;
+#game-over-container {
+  width: 700px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--green);
+  border: outset var(--dark-green) 10px;
+}
+
+h2 {
+  margin: auto;
+  font-size: 64pt;
+  font-weight: bold;
+  color: var(--light-cream);
+  border-top: solid var(--light-cream) 5px;
+  border-bottom: solid var(--light-cream) 5px;
+}
+
+h3 {
+  margin: 0 auto 8% auto;
+  font-size: 36pt;
+  font-weight: bold;
+  color: var(--light-cream);
+}
+
+#play-again-button {
+  font-size: 36pt;
+  margin: auto;
+  margin-bottom: 0;
+  color: var(--darker-green);
+  border-color: var(--darker-green);
+}
+
+#play-again-button:hover {
+  color: var(--light-cream);
+  border-color: var(--light-cream);
+}
+
+#home-button {
+  font-size: 36pt;
+  margin: auto;
+  color: var(--darker-green);
+  border-color: var(--darker-green);
+}
+
+#home-button:hover {
+  color: var(--light-cream);
+  border-color: var(--light-cream);
 }

@@ -10,7 +10,11 @@ const playerScreen = (() => {
     main.appendChild(onePlayerButton);
   }
 
-  return {onePlayerButton, load};
+  const addOnePlayerHandler = function(callback) {
+    onePlayerButton.addEventListener('click', callback);
+  }
+
+  return {load, addOnePlayerHandler};
 })();
 
 export {
