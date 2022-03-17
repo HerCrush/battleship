@@ -10,8 +10,6 @@ const game = (() => {
   };
 
   const start = function() {
-    player1.reset();
-    computer1.reset();
     computer1.placeAllShipsAtRandom();
   };
 

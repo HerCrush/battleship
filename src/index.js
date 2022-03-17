@@ -43,5 +43,3 @@ const selectPlayer = function() {
 
 homeScreen.load();
 homeScreen.addPlayHandler(selectPlayer);
-gameScreen.addPlayAgainHandler(startShipPlacement);
-gameScreen.addHomeHandler();

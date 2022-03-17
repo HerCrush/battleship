@@ -48,23 +48,10 @@ const shipPlacementScreen = (() => {
       }
     }
 
-    const clean = function() {
-      for(let i = 0; i<10; i++) {
-        for(let j = 0; j<10; j++) {
-          while(grid[i][j].firstChild) {
-            grid[i][j].removeChild(grid[i][j].lastChild);
-          }
-        }
-      }
-
-      layoutRecord.clean();
-    }
-
     frame.append(xAxis, yAxis, board);
     return {
       frame,
-      grid,
-      clean
+      grid
     };
   })();
 
@@ -100,7 +87,6 @@ const shipPlacementScreen = (() => {
   container.append(shipsContainer, layoutGameboard.frame);
   const load = function() {
     clean();
-    layoutGameboard.clean();
     const carrier = makeShip(5);
     carrier.id = 'carrier';
     const battleship = makeShip(4);

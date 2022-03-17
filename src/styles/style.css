@@ -202,15 +202,16 @@ button:hover {
 
 #game-over-container {
   width: 700px;
-  height: 500px;
+  height: 300px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: var(--green);
   border: outset var(--dark-green) 10px;
 }
 
 h2 {
-  margin: auto;
+  margin: 2% auto;
   font-size: 64pt;
   font-weight: bold;
   color: var(--light-cream);
@@ -219,33 +220,8 @@ h2 {
 }
 
 h3 {
-  margin: 0 auto 8% auto;
+  margin: 2% auto;
   font-size: 36pt;
   font-weight: bold;
   color: var(--light-cream);
-}
-
-#play-again-button {
-  font-size: 36pt;
-  margin: auto;
-  margin-bottom: 0;
-  color: var(--darker-green);
-  border-color: var(--darker-green);
-}
-
-#play-again-button:hover {
-  color: var(--light-cream);
-  border-color: var(--light-cream);
-}
-
-#home-button {
-  font-size: 36pt;
-  margin: auto;
-  color: var(--darker-green);
-  border-color: var(--darker-green);
-}
-
-#home-button:hover {
-  color: var(--light-cream);
-  border-color: var(--light-cream);
 }

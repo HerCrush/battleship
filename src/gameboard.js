@@ -282,12 +282,6 @@ class Gameboard {
   areAllShipsSunk() {
     return this.ships.every(function(ship) {return ship.isSunk()});
   }
-
-  clean() {
-    this.layout = create2DArray('water');
-    this.record = create2DArray();
-    this.ships = [];
-  }
 }
 
 export {
