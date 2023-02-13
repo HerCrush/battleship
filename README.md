@@ -5,6 +5,6 @@ I focused on having a nice ship placement mechanic that felt good to use, which 
 
 The app also features a selfmade enemy AI.
 
-**[LIVE VERSION](https://nachito-schon.github.io/battleship/)**
+**[TRY THE APP](https://nachito-schon.github.io/battleship/)**
 
 ![battleship-preview-800w](https://user-images.githubusercontent.com/85847402/218330155-62dfb6ca-0d99-4dd9-9ac2-1c901ea36f89.png)
