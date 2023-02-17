@@ -1,6 +1,6 @@
 :root {
-  --cell-size: 50px;
-  --cell-border-width: 2px;
+  --cell-size: 1.5rem;
+  --cell-border-width: 0.125rem;
   --light-blue: rgb(144, 158, 199);
   --blue: hsl(225, 31%, 46%);
   --dark-blue: rgb(66,71,86);
@@ -14,14 +14,18 @@
 }
 
 body {
+  height: 100vh;
+  width: 100vw;
   background-color: var(--lighter-green);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 h1{
-  width: fit-content;
   margin: auto;
-  margin-top: 2%;
-  font-size: 64pt;
+  margin-top: 2rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--darker-blue);
   border-top: solid var(--darker-blue) 5px;
@@ -31,6 +35,7 @@ h1{
 main {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 button {
@@ -47,25 +52,26 @@ button:hover {
 }
 
 #play-button {
-  margin: 10% auto;
-  font-size: 46pt;
+  margin: 6rem auto;
+  font-size: 3rem;
 }
 
 #one-player-button {
-  margin: 10% auto;
-  font-size: 32pt;
+  margin: 6rem auto;
+  font-size: 2em;
 }
 
 #ready-button {
   margin: auto;
-  font-size: 32pt;
+  font-size: 2em;
 }
 
 #gameboard-container {
   display: flex;
-  width: 1200px;
   margin: auto;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .board-frame {
@@ -73,7 +79,7 @@ button:hover {
   grid-template-areas:
     "a b"
     "c d";
-  margin: 5% 0;
+  margin: 1rem 0;
 }
 
 .x-axis {
@@ -81,15 +87,19 @@ button:hover {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0.5em 0;
+  margin: 0.125rem 0;
+}
+
+.x-axis p, .y-axis p {
+  font-family: Verdana, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--dark-green);
 }
 
 .x-axis p {
   width: var(--cell-size);
   text-align: center;
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  color: var(--dark-green);
 }
 
 .y-axis {
@@ -98,21 +108,17 @@ button:hover {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin: 0 0.5em;
+  margin: 0 0.125rem;
 }
 
 .y-axis p {
   height: var(--cell-size);
   align-items: center;
   line-height: var(--cell-size);
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  color: var(--dark-green);
 }
 
 .board {
   grid-area: d;
-  width: fit-content;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   border: outset var(--green) 5px;
@@ -127,10 +133,12 @@ button:hover {
 
 #ships-container {
   margin: auto;
-  width: 300px;
-  height: 500px;
+  padding: 1rem;
+  min-height: 50%;
+  min-width: 25%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
   border: inset var(--green) 5px;
   background-color: hsl(124, 21%, 60%);
 }
@@ -224,4 +232,59 @@ h3 {
   font-size: 36pt;
   font-weight: bold;
   color: var(--light-cream);
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  #play-button {
+    font-size: 4rem;
+  }
+
+  #one-player-button {
+    font-size: 3em;
+  }
+
+  .x-axis p {
+    width: 1.75rem;
+  }
+
+
+  .y-axis p {
+    height: 1.75rem;
+    line-height: 1.75rem;
+  }
+
+  .board-grid, .draggable-ship-part {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  h1 {
+    font-size: 4rem;
+    margin-top: 3rem;
+  }
+
+  #ready-button {
+    font-size: 2.5em;
+  }
+
+  .x-axis p {
+    width: 2.5rem;
+  }
+
+
+  .y-axis p {
+    height: 2.5rem;
+    line-height: 2.5rem;
+  }
+
+  .board-grid, .draggable-ship-part {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
