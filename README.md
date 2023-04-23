@@ -13,4 +13,4 @@ The game ends when all of your or the enemy's ships are sunk.
 
 **[TRY THE APP](https://nachito-schon.github.io/battleship/)**
 
-![battleship-preview-800w](https://user-images.githubusercontent.com/85847402/218330155-62dfb6ca-0d99-4dd9-9ac2-1c901ea36f89.png)
+![battleship](https://user-images.githubusercontent.com/85847402/233861004-10c4ecee-ddff-4b6a-b73e-c8635ddf36cd.jpg)
